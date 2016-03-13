@@ -3,5 +3,11 @@
 script.
 	initComponents.push({
 		name: 'compass',
-		place: '#compass'
+		place: '#compass',
+		data: {
+			target: {
+				latitude: !{global.target.latitude},
+				longitude: !{global.target.longitude}
+			}
+		}
 	})

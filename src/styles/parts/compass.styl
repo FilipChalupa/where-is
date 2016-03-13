@@ -4,6 +4,9 @@
 	size 20px 100px
 	color red
 	background currentColor
+	animation circle 1s linear infinite
+	opacity 0.1
+	transition opacity 0.3s, transform 0.3s
 
 	&:before
 		absolute top -30px left -10px
@@ -12,3 +15,14 @@
 		border-right 20px solid transparent
 		content ''
 
+	&.is-ready
+		opacity 1
+		animation none
+
+@keyframes circle
+	0%
+		transform rotate(0deg)
+	50%
+		transform rotate(180deg)
+	100%
+		transform rotate(360deg)
