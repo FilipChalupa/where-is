@@ -1,18 +1,7 @@
-`mango-cli` project example
-===========================
+#Where is Brno | Kde je Brno
 
-Do you have `mango-cli` installed globally?
+Click [here](http://onset.github.io/kde-je-brno/) to find out.
 
-If not: `npm install -g mango-cli`
+##Development
 
-Init your project
------------------
-
-Run command `mango init your-project-directory-name`.
-
-Oh, that's it? Go to that directory, run `mango dev` and your browser should start up.
-
-Preview
-------------------
-
-http://onset.github.io/kde-je-brno/
+Based on [mango-cli](http://mangoweb.github.io/kde-je-brno/).
