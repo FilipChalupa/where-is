@@ -1,6 +1,6 @@
 #Where is Brno | Kde je Brno
 
-Click [here](http://onset.github.io/kde-je-brno/) to find out.
+Click [here](http://kdejebrno.cz/) to find out.
 
 ##Development
 
