@@ -15,6 +15,7 @@ if(DEBUG) console.time('Components initialization')
 //
 // Components declarations
 var components = {
+	'compass': require('./components/compass'),
 	'example': require('./components/example'),
 	'shapes': require('./components/shapes')
 }
