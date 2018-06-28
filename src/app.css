@@ -47,7 +47,6 @@ body {
 .compass {
 	position: relative;
 	width: calc(var(--base) * 80);
-	transform: rotate(0deg);
 }
 
 .compass::before {

@@ -43,7 +43,15 @@ let targetAngle = 0
 let currentAngle = 0
 
 const loop = () => {
-	currentAngle += (targetAngle - currentAngle) / 2
+	const normalizedTarget = (360 + targetAngle) % 360
+	const normalizedCurrent = (360 + currentAngle) % 360
+	let difference = normalizedTarget - normalizedCurrent
+
+	if (difference > 270) {
+		difference -= 360
+	}
+
+	currentAngle += difference / 20
 	compasssElement.style.transform = `rotate(${currentAngle}deg)`
 	requestAnimationFrame(loop)
 }
