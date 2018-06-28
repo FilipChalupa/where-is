@@ -69,7 +69,7 @@ const resolvePosition = position => {
 			}
 			if (northDir) {
 				arrowElement.style.transform = 'none'
-				targetAngle = northDir + angleDiff
+				targetAngle = northDir + angleDiff - window.screen.orientation.angle
 			}
 		})
 	} else {
