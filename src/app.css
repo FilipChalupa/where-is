@@ -1,0 +1,89 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	margin: 0;
+	text-align: center;
+	background-color: #000000;
+	--base: 1vw;
+}
+
+@media screen and (orientation: landscape) {
+	body {
+		--base: 1vh;
+	}
+}
+
+.layout {
+	padding: 1em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.title {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 1em;
+	font-size: calc(var(--base) * 9);
+	color: #ffffff;
+	mix-blend-mode: soft-light;
+}
+
+.compass {
+	position: relative;
+	width: calc(var(--base) * 80);
+	transform: rotate(0deg);
+}
+
+.compass::before {
+	content: '';
+	display: block;
+	padding-top: 100%;
+}
+
+.arrow {
+	position: absolute;
+	top: 0;
+	left: calc(50% - var(--base) * 8 / 2);
+	width: calc(var(--base) * 8);
+	height: 100%;
+	color: #cb0e21;
+	transform: scale(0);
+	transition: transform 0.2s;
+}
+
+.arrow::before {
+	content: '';
+	position: absolute;
+	bottom: 86%;
+	left: calc(-4 * var(--base));
+
+	border-bottom: calc(var(--base) * 15) solid;
+	border-left: calc(var(--base) * 8) solid transparent;
+	border-right: calc(var(--base) * 8) solid transparent;
+}
+
+.arrow::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 87%;
+	background-color: currentColor;
+}
