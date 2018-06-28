@@ -42,9 +42,13 @@ document.body.appendChild(
 let targetAngle = 0
 let currentAngle = 0
 
+const modulo = (input, base) => {
+	return ((input % base) + base) % base
+}
+
 const loop = () => {
-	const normalizedTarget = (360 + targetAngle) % 360
-	const normalizedCurrent = (360 + currentAngle) % 360
+	const normalizedTarget = modulo(targetAngle, 360)
+	const normalizedCurrent = modulo(currentAngle, 360)
 	let difference = normalizedTarget - normalizedCurrent
 
 	if (difference > 270) {
