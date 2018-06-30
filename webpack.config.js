@@ -70,6 +70,7 @@ module.exports = args => {
 				},
 			}),
 			new webpack.DefinePlugin({
+				DEBUG: JSON.stringify(!IS_PROD),
 				DEFAULT_LOCATION: JSON.stringify({
 					latitude: 50.0796689,
 					longitude: 14.4297084,

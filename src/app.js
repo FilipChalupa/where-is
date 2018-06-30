@@ -5,7 +5,9 @@ import googleAnalytics from './utils/googleAnalytics'
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 import fastAddToHomescreen from './utils/fastAddToHomescreen'
 
-OfflinePluginRuntime.install()
+if (!DEBUG) {
+	OfflinePluginRuntime.install()
+}
 fastAddToHomescreen()
 googleAnalytics('UA-52555251-5')
 
@@ -68,6 +70,8 @@ let targetNorthOffset = null
 let currentLocation = null
 
 const loop = () => {
+	arrowElement.style.opacity = Math.random()
+	console.log('loop')
 	let targetArrowAngle = null
 	if (deviceNorthOffset !== null && targetNorthOffset !== null) {
 		targetArrowAngle =
