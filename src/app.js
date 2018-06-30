@@ -1,22 +1,9 @@
 import styles from './app.css'
 import bearing from './utils/bearing'
+import angleDifference from './utils/angleDifference'
+import googleAnalytics from './utils/googleAnalytics'
 
-// Google analytics
-;(function(i, s, o, g, r, a, m) {
-	i['GoogleAnalyticsObject'] = r
-	;(i[r] =
-		i[r] ||
-		function() {
-			;(i[r].q = i[r].q || []).push(arguments)
-		}),
-		(i[r].l = 1 * new Date())
-	;(a = s.createElement(o)), (m = s.getElementsByTagName(o)[0])
-	a.async = 1
-	a.src = g
-	m.parentNode.insertBefore(a, m)
-})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga')
-ga('create', 'UA-52555251-5', 'auto')
-ga('send', 'pageview')
+googleAnalytics('UA-52555251-5')
 
 function component(type, className, children = []) {
 	const element = document.createElement(type)
@@ -41,20 +28,6 @@ document.body.appendChild(
 
 let targetAngle = 0
 let currentAngle = 0
-
-const modulo = (input, base) => {
-	return ((input % base) + base) % base
-}
-
-const angleDifference = (input, target) => {
-	const rawDifference = target - input
-	const moduloDifference = modulo(rawDifference, 360)
-	if (moduloDifference > 180) {
-		return moduloDifference - 360
-	} else {
-		return moduloDifference
-	}
-}
 
 const loop = () => {
 	const difference = angleDifference(currentAngle, targetAngle)
