@@ -20,13 +20,15 @@ body {
 
 .layout {
 	position: relative;
-	padding: 1em;
+	font-size: var(--base);
+	margin: 4em;
+	height: calc(100vh - 8em);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	height: 100vh;
 	overflow: hidden;
+	color: #ffffff;
 }
 
 .title {
@@ -40,14 +42,13 @@ body {
 	align-items: center;
 	justify-content: center;
 	margin: 1em;
-	font-size: calc(var(--base) * 9);
-	color: #ffffff;
+	font-size: 9em;
 	mix-blend-mode: soft-light;
 }
 
 .compass {
 	position: relative;
-	width: calc(var(--base) * 80);
+	width: 80em;
 }
 
 .compass::before {
@@ -59,8 +60,8 @@ body {
 .arrow {
 	position: absolute;
 	top: 0;
-	left: calc(50% - var(--base) * 8 / 2);
-	width: calc(var(--base) * 8);
+	left: calc(50% - 4em);
+	width: 8em;
 	height: 100%;
 	color: #cb0e21;
 	transform: scale(0);
@@ -73,9 +74,9 @@ body {
 	bottom: 86%;
 	left: calc(-4 * var(--base));
 
-	border-bottom: calc(var(--base) * 15) solid;
-	border-left: calc(var(--base) * 8) solid transparent;
-	border-right: calc(var(--base) * 8) solid transparent;
+	border-bottom: 15em solid;
+	border-left: 8em solid transparent;
+	border-right: 8em solid transparent;
 }
 
 .arrow::after {
@@ -86,4 +87,13 @@ body {
 	bottom: 0;
 	height: 87%;
 	background-color: currentColor;
+}
+
+.note {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-size: 4em;
+	margin: 0;
 }

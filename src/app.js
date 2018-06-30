@@ -17,13 +17,15 @@ function component(type, className, children = []) {
 }
 
 const titleElement = component('h1', styles.title)
+const noteElement = component('p', styles.note)
 const arrowElement = component('div', styles.arrow)
 const compasssElement = component('div', styles.compass, [arrowElement])
 
 titleElement.textContent = 'Kde je Brno?'
+noteElement.textContent = 'v1'
 
 document.body.appendChild(
-	component('div', styles.layout, [titleElement, compasssElement])
+	component('div', styles.layout, [titleElement, noteElement, compasssElement])
 )
 
 let targetAngle = 0
