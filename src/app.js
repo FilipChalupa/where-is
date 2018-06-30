@@ -134,7 +134,7 @@ if (window.DeviceMotionEvent) {
 
 const fallBackToDefaultLocation = () => {
 	addNote(
-		'Nepodařilo se zjistit vaši polohu. 🤔 Předpokládejme, že jste v Praze.'
+		'Nepodařilo se zjistit vaši polohu. :( Předpokládejme, že jste v Praze.'
 	)
 	currentLocation = DEFAULT_LOCATION
 	resolveTargetAngle()
