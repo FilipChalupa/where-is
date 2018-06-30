@@ -18,15 +18,45 @@ function component(type, className, children = []) {
 
 const titleElement = component('h1', styles.title)
 const noteElement = component('p', styles.note)
+const noteToggleElement = component('button', styles.noteToggle)
 const arrowElement = component('div', styles.arrow)
 const compasssElement = component('div', styles.compass, [arrowElement])
 
 titleElement.textContent = 'Kde je Brno?'
-noteElement.textContent = 'v1'
 
 document.body.appendChild(
-	component('div', styles.layout, [titleElement, noteElement, compasssElement])
+	component('div', styles.layout, [
+		titleElement,
+		noteElement,
+		noteToggleElement,
+		compasssElement,
+	])
 )
+
+const toggleNote = () => {
+	if (noteElement.classList.contains(styles.isActive)) {
+		noteElement.classList.remove(styles.isActive)
+	} else {
+		if (updateNote()) {
+			noteElement.classList.add(styles.isActive)
+		}
+	}
+}
+
+const pendingNotes = []
+const addNote = text => {
+	pendingNotes.push(text)
+}
+const updateNote = () => {
+	if (pendingNotes.length > 0) {
+		const text = pendingNotes.shift()
+		noteElement.textContent = text
+		return true
+	}
+	return false
+}
+
+noteToggleElement.addEventListener('click', toggleNote)
 
 let targetAngle = 0
 let currentAngle = 0
@@ -64,7 +94,7 @@ const resolvePosition = position => {
 			}
 		})
 	} else {
-		alert('Compass not supported.')
+		addNote('Compass není podporován.')
 	}
 }
 
@@ -74,9 +104,9 @@ if (navigator.geolocation) {
 			resolvePosition(event)
 		},
 		() => {
-			alert('Nepodařilo se zjistit vaši polohu. :(')
+			addNote('Nepodařilo se zjistit vaši polohu. :(')
 		}
 	)
 } else {
-	alert('Vaše zařízení nepodporuje zjišťování polohy.')
+	addNote('Vaše zařízení nepodporuje zjišťování polohy.')
 }
