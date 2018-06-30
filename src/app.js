@@ -2,6 +2,9 @@ import styles from './app.css'
 import bearing from './utils/bearing'
 import angleDifference from './utils/angleDifference'
 import googleAnalytics from './utils/googleAnalytics'
+import * as OfflinePluginRuntime from 'offline-plugin/runtime'
+
+OfflinePluginRuntime.install()
 
 googleAnalytics('UA-52555251-5')
 

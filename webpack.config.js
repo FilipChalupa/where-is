@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
+const OfflinePlugin = require('offline-plugin')
 const webpack = require('webpack')
 
 module.exports = args => {
@@ -61,6 +62,12 @@ module.exports = args => {
 						src: path.resolve(`src/images/app-icon/${size}.png`),
 					}
 				}),
+			}),
+			new OfflinePlugin({
+				autoUpdate: true,
+				ServiceWorker: {
+					minify: true,
+				},
 			}),
 			new webpack.DefinePlugin({
 				DEFAULT_LOCATION: JSON.stringify({

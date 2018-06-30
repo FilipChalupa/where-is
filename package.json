@@ -23,6 +23,7 @@
 	"devDependencies": {
 		"css-loader": "^0.28.11",
 		"gh-pages": "^1.2.0",
+		"offline-plugin": "^5.0.5",
 		"style-loader": "^0.21.0",
 		"webpack": "^4.13.0",
 		"webpack-cli": "^3.0.8",
