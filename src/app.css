@@ -72,8 +72,7 @@ body {
 	content: '';
 	position: absolute;
 	bottom: 86%;
-	left: calc(-4 * var(--base));
-
+	left: calc(-4em);
 	border-bottom: 15em solid;
 	border-left: 8em solid transparent;
 	border-right: 8em solid transparent;
