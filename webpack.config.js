@@ -49,7 +49,7 @@ module.exports = args => {
 			}),
 			new WebpackPwaManifest({
 				name: 'Kde je Brno?',
-				short_name: 'Brno?',
+				short_name: 'Kde je?',
 				description: DESCRIPTION,
 				filename: 'manifest.[hash].webmanifest',
 				start_url: BASE_URL,
