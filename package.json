@@ -5,8 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "webpack-dev-server --env.NODE_ENV=development",
-		"build": "webpack --mode production --env.NODE_ENV=production",
+		"start": "webpack-dev-server --host 0.0.0.0 --env.NODE_ENV=development",
+		"build": "webpack --env.NODE_ENV=production",
 		"deploy": "npm run build && gh-pages -d dist"
 	},
 	"repository": {
