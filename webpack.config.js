@@ -43,6 +43,7 @@ module.exports = args => {
 					viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
 					description: DESCRIPTION,
 				},
+				favicon: 'src/images/app-icon/36.png',
 				filename: 'index.html',
 			}),
 			new WebpackPwaManifest({
