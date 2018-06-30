@@ -3,9 +3,10 @@ import bearing from './utils/bearing'
 import angleDifference from './utils/angleDifference'
 import googleAnalytics from './utils/googleAnalytics'
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
+import fastAddToHomescreen from './utils/fastAddToHomescreen'
 
 OfflinePluginRuntime.install()
-
+fastAddToHomescreen()
 googleAnalytics('UA-52555251-5')
 
 function component(type, className, children = []) {
