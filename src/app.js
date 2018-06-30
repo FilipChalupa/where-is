@@ -46,16 +46,20 @@ const modulo = (input, base) => {
 	return ((input % base) + base) % base
 }
 
-const loop = () => {
-	const normalizedTarget = modulo(targetAngle, 360)
-	const normalizedCurrent = modulo(currentAngle, 360)
-	let difference = normalizedTarget - normalizedCurrent
-
-	if (difference > 270) {
-		difference -= 360
+const angleDifference = (input, target) => {
+	const rawDifference = target - input
+	const moduloDifference = modulo(rawDifference, 360)
+	if (moduloDifference > 180) {
+		return moduloDifference - 360
+	} else {
+		return moduloDifference
 	}
+}
 
-	currentAngle += difference / 20
+const loop = () => {
+	const difference = angleDifference(currentAngle, targetAngle)
+
+	currentAngle = Math.round((currentAngle + difference / 20) * 1000) / 1000
 	compasssElement.style.transform = `rotate(${currentAngle}deg)`
 	requestAnimationFrame(loop)
 }
