@@ -4,6 +4,7 @@ import angleDifference from './utils/angleDifference'
 import googleAnalytics from './utils/googleAnalytics'
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 import fastAddToHomescreen from './utils/fastAddToHomescreen'
+import orientation from './utils/orientation'
 
 if (!DEBUG) {
 	OfflinePluginRuntime.install()
@@ -70,12 +71,9 @@ let targetNorthOffset = null
 let currentLocation = null
 
 const loop = () => {
-	arrowElement.style.opacity = Math.random()
-	console.log('loop')
 	let targetArrowAngle = null
 	if (deviceNorthOffset !== null && targetNorthOffset !== null) {
-		targetArrowAngle =
-			deviceNorthOffset + targetNorthOffset - window.screen.orientation.angle
+		targetArrowAngle = deviceNorthOffset + targetNorthOffset - orientation()
 	}
 	const difference = angleDifference(
 		currentArrowAngle,
