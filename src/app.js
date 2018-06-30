@@ -99,7 +99,6 @@ const fallBackToDefaultNorthOffset = () => {
 	)
 	deviceNorthOffset = 0
 	arrowElement.style.opacity = '1'
-	resolveTargetAngle()
 }
 
 if (window.DeviceMotionEvent) {
