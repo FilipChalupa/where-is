@@ -58,55 +58,91 @@ const updateNote = () => {
 
 noteToggleElement.addEventListener('click', toggleNote)
 
-let targetAngle = 0
-let currentAngle = 0
+let currentArrowAngle = 0
+let deviceNorthOffset = null
+let targetNorthOffset = null
+let currentLocation = null
 
 const loop = () => {
-	const difference = angleDifference(currentAngle, targetAngle)
+	let targetArrowAngle = null
+	if (deviceNorthOffset !== null && targetNorthOffset !== null) {
+		targetArrowAngle =
+			deviceNorthOffset + targetNorthOffset - window.screen.orientation.angle
+	}
+	const difference = angleDifference(
+		currentArrowAngle,
+		typeof targetArrowAngle === 'number'
+			? targetArrowAngle
+			: currentArrowAngle + 40
+	)
 
-	currentAngle = Math.round((currentAngle + difference / 20) * 1000) / 1000
-	compasssElement.style.transform = `rotate(${currentAngle}deg)`
+	currentArrowAngle =
+		Math.round((currentArrowAngle + difference / 20) * 1000) / 1000
+	compasssElement.style.transform = `rotate(${currentArrowAngle}deg)`
 	requestAnimationFrame(loop)
 }
 
-const resolvePosition = position => {
-	const angleDiff = bearing.angle(
-		position.coords.latitude,
-		position.coords.longitude,
-		49.2020489,
-		16.5079214
+loop()
+
+const resolveTargetAngle = () => {
+	targetNorthOffset = bearing.angle(
+		currentLocation.latitude,
+		currentLocation.longitude,
+		TARGET_LOCATION.latitude,
+		TARGET_LOCATION.longitude
 	)
-
-	loop()
-
-	if (window.DeviceMotionEvent) {
-		window.addEventListener('deviceorientation', event => {
-			let northDir
-			if (typeof event.webkitCompassHeading === 'undefined') {
-				northDir = event.alpha
-			} else {
-				// Apple has it's own way
-				northDir = event.webkitCompassHeading
-			}
-			if (northDir) {
-				arrowElement.style.transform = 'none'
-				targetAngle = northDir + angleDiff - window.screen.orientation.angle
-			}
-		})
-	} else {
-		addNote('Compass není podporován.')
-	}
 }
 
-if (navigator.geolocation) {
-	navigator.geolocation.getCurrentPosition(
-		event => {
-			resolvePosition(event)
-		},
-		() => {
-			addNote('Nepodařilo se zjistit vaši polohu. :(')
-		}
+const fallBackToDefaultNorthOffset = () => {
+	addNote(
+		'Vaše zařízení nemá kompas. Pro správné fungování miřte zařízením na sever. Sever poznáte podle lišejníků.'
 	)
+	deviceNorthOffset = 0
+	arrowElement.style.opacity = '1'
+	resolveTargetAngle()
+}
+
+if (window.DeviceMotionEvent) {
+	const updateOrientation = event => {
+		let offset
+		if (typeof event.webkitCompassHeading === 'undefined') {
+			offset = event.alpha
+		} else {
+			offset = event.webkitCompassHeading
+		}
+		if (typeof offset === 'number') {
+			deviceNorthOffset = offset
+			arrowElement.style.opacity = '1'
+		}
+	}
+
+	window.addEventListener('deviceorientation', updateOrientation)
+	setTimeout(() => {
+		if (deviceNorthOffset === null) {
+			window.removeEventListener('deviceorientation', updateOrientation)
+			fallBackToDefaultNorthOffset()
+		}
+	}, 2000)
 } else {
-	addNote('Vaše zařízení nepodporuje zjišťování polohy.')
+	fallBackToDefaultNorthOffset()
+}
+
+const fallBackToDefaultLocation = () => {
+	addNote(
+		'Nepodařilo se zjistit vaši polohu. 🤔 Předpokládejme, že jste v Praze.'
+	)
+	currentLocation = DEFAULT_LOCATION
+	resolveTargetAngle()
+}
+
+if ('geolocation' in navigator) {
+	navigator.geolocation.getCurrentPosition(event => {
+		currentLocation = {
+			latitude: event.coords.latitude,
+			longitude: event.coords.longitude,
+		}
+		resolveTargetAngle()
+	}, fallBackToDefaultLocation)
+} else {
+	fallBackToDefaultLocation()
 }

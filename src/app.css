@@ -64,8 +64,8 @@ body {
 	width: 8em;
 	height: 100%;
 	color: #cb0e21;
-	transform: scale(0);
-	transition: transform 0.2s;
+	opacity: 0.2;
+	transition: opacity 0.2s;
 }
 
 .arrow::before {

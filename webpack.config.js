@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = args => {
 	const IS_PROD = args.NODE_ENV === 'production'
@@ -39,6 +40,16 @@ module.exports = args => {
 					description: 'Kterým směrem se vydat a nevydat, když je nejhůře?',
 				},
 				filename: 'index.html',
+			}),
+			new webpack.DefinePlugin({
+				DEFAULT_LOCATION: JSON.stringify({
+					latitude: 50.0796689,
+					longitude: 14.4297084,
+				}),
+				TARGET_LOCATION: JSON.stringify({
+					latitude: 49.2020489,
+					longitude: 16.5079214,
+				}),
 			}),
 		],
 	}
