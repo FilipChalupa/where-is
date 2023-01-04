@@ -1,5 +1,5 @@
 # Kde je Brno
 
-[Ukázka](https://onset.github.io/where-is/)
+[Ukázka](https://filipchalupa.cz/where-is/)
 
 ![Screenshot](./screenshot.png)
